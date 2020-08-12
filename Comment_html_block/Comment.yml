@@ -1,0 +1,19 @@
+---
+# This code uses a local file but also applicable on remote server files.
+- name: Comment all the lines available inside a tag in any file
+  hosts: localhost
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Comment the lines and end tag
+      replace:
+        path: /home/groot/workspace/ProjectAnsible/nxlog/testfiles/Env.conf #html file location
+        after: "<resource server1>\n"
+        before: "</resource>"
+        regexp: "^"
+        replace: "#"
+    - name: Comment the open tag
+      replace:
+        path: /home/groot/workspace/ProjectAnsible/nxlog/testfiles/Env.conf
+        regexp: "<resource server1>"
+        replace: "#<resource server1>"
